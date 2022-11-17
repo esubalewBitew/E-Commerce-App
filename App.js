@@ -158,7 +158,6 @@ function HomeScreen({ navigation }) {
             <Category2
               imageURi={item.imageURi}
               proprtyname={item.proprtyname}
-             
             />
           )}
         />
@@ -256,8 +255,8 @@ function TabNavigator() {
           labelStyle: { paddingBottom: 5, fontSize: 10 },
         }}
       >
-        <Tab.Screen name="Home" component={StackNavigators} />
-        <Tab.Screen name="cart" component={MyCarts} />
+        <Tab.Screen name="Home" component={StackNavigators}/>
+        <Tab.Screen name="cart" component={MyCarts}/>
         <Tab.Screen name="notification" component={GetSetting} />
         <Tab.Screen name="Profile" component={Profile} />
       </Tab.Navigator>
@@ -353,7 +352,7 @@ function StackNavigatorDeliver() {
   );
 }
 
-function MainNavigator() {
+function MainNavigator(){
   const { isLogined } = useLogin();
   const { classs } = useLogin();
   if (classs == "Buyer") {

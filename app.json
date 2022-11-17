@@ -1,0 +1,47 @@
+{
+  "expo": {
+    "name": "Aseb",
+    "slug": "aseb",
+    "version": "1.0.1",
+    "orientation": "portrait",
+    "icon": "./assets/aseblogo.jpg",
+    "plugins": [
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "custom photos permission",
+          "cameraPermission": "Allow $(PRODUCT_NAME) to open the camera",
+
+          "//": "Disables the microphone permission",
+          "microphonePermission": false
+        }
+      ]
+    ],
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#FFFFFF"
+      },
+      "package": "com.paziyon.Aseb",
+      "versionCode": 1
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    }
+  }
+  
+}
