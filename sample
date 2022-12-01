@@ -1,0 +1,85 @@
+import {StyleSheet, Text, View, SafeAreaView, TextInput} from 'react-native';
+import React from 'react';
+import algoliasearch from 'algoliasearch/lite';
+import {
+  InstantSearch,
+  connectSearchBox,
+  connectInfiniteHits,
+  connectRefinementList,
+  connectStats,
+  connectMenu,
+  connectSortBy,
+  connectRange,
+  connectCurrentRefinements,
+} from 'react-instantsearch-native';
+
+const App = () => {
+  const searchClient = algoliasearch(
+    'latency',
+    '6be0576ff61c053d5f9a3225e2a90f76',
+  );
+
+  const SearchBox = connectSearchBox(
+    ({refinement, refine, currentRefinement}) => (
+      <View style={styles.searchBox}>
+        <Text style={styles.searchBoxText}>Search</Text>
+        <TextInput
+          style={styles.searchBoxInput}
+          value={currentRefinement}
+          onChangeText={text => refine(text)}
+          placeholder={'Search a product...'}
+          clearButtonMode={'always'}
+          underlineColorAndroid={'white'}
+          spellCheck={false}
+          autoCorrect={false}
+          autoCapitalize={'none'}
+        />
+      </View>
+    ),
+  );
+
+  const ConnectedSearchBox = connectSearchBox(SearchBox);
+
+  const Hits = connectInfiniteHits(({hits}) => (
+    <View style={styles.hits}>
+      <Text style={styles.hitsTitle}>Products</Text>
+      {hits.map(hit => (
+        <View key={hit.objectID} style={styles.hit}>
+          <Text style={styles.hitText}>{hit.name}</Text>
+        </View>
+      ))}
+    </View>
+  ));
+
+  const ConnectedHits = connectInfiniteHits(Hits);
+
+  return (
+    <SafeAreaView>
+      <InstantSearch searchClient={searchClient} indexName="instant_search">
+        <ConnectedSearchBox />
+        <ConnectedHits />
+      </InstantSearch>
+    </SafeAreaView>
+  );
+};
+
+export default App;
+
+const styles = StyleSheet.create({
+  searchBox: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    margin: 10,
+  },
+  searchBoxText: {
+    fontSize: 20,
+    marginRight: 10,
+  },
+  searchBoxInput: {
+    flex: 1,
+    fontSize: 20,
+    borderWidth: 1,
+    borderColor: '#ccc',
+    padding: 5,
+  },
+});
